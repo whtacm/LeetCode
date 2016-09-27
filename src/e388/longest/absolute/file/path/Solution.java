@@ -79,7 +79,7 @@ public class Solution {
 
 		Stack<String> path = new Stack<String>();
 		input = input.replace("\n", "").replace("\t", "/");
-		
+
 		System.out.println(input);
 
 		int start = 0;
@@ -88,17 +88,41 @@ public class Solution {
 		int slashcount = 0;
 		char ch = 'a';
 
-		for (int i = 0; i < input.length(); i++) {
+		for (int i = 0; i < input.length();) {
 			ch = input.charAt(i);
 			switch (ch) {
 			case '/':
+				while (input.charAt(i++) == '/' && i < input.length()) {
+					slashcount++;
+				}
 
+				while (slashcount < path.size() && path.size() > 0) {
+					System.out.println("pop:" + path);
+					cur -= path.pop().length() + 1;
+				}
+
+				path.push(input.substring(start, i - slashcount - 1));
+				System.out.println("push:" + path);
+				slashcount = 0;
+				cur++;
+				start = i - 1;
 				break;
+
 			case '.':
+				while (input.charAt(i++) != '/' && i < input.length()) {
+					cur++;
+				}
 
+				System.out.println("count:" + path);
+
+				if (cur > max) {
+					max = cur - 1;
+				}
 				break;
+
 			default:
 				cur++;
+				i++;
 				break;
 			}
 		}
