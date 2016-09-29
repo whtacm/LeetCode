@@ -1,7 +1,8 @@
 /**
  * 
  */
-package e388.longest.absolute.file.path;
+package c388.longest.absolute.file.path;
+
 
 import java.util.Stack;
 
@@ -77,62 +78,53 @@ public class Solution {
 			return 0;
 		}
 
-		Stack<String> path = new Stack<String>();
-		input = input.replace("\n", "").replace("\t", "/");
-
-		System.out.println(input);
-
-		int start = 0;
+		Stack<Integer> path = new Stack<Integer>();
+		input = input.replace("\t", "/");
 		int max = 0;
 		int cur = 0;
-		int slashcount = 0;
-		char ch = 'a';
+		int depth = 0;
 
-		for (int i = 0; i < input.length();) {
-			ch = input.charAt(i);
-			switch (ch) {
-			case '/':
-				while (input.charAt(i++) == '/' && i < input.length()) {
-					slashcount++;
-				}
+		String[] array = input.split("\n");
 
-				while (slashcount < path.size() && path.size() > 0) {
-					System.out.println("pop:" + path);
-					cur -= path.pop().length() + 1;
-				}
-
-				path.push(input.substring(start, i - slashcount - 1));
-				System.out.println("push:" + path);
-				slashcount = 0;
-				cur++;
-				start = i - 1;
-				break;
-
-			case '.':
-				while (input.charAt(i++) != '/' && i < input.length()) {
-					cur++;
-				}
-
-				System.out.println("count:" + path);
-
-				if (cur > max) {
-					max = cur - 1;
-				}
-				break;
-
-			default:
-				cur++;
-				i++;
-				break;
+		for (String s : array) {
+			depth = getDepth(s);
+			while (depth < path.size()) {
+				cur -= path.pop() + 1;
 			}
+
+			if (s.contains(".")) {
+				max = ((cur + s.length() - depth) > max) ? (cur + s.length() - depth)
+						: max;
+//				System.out.println(path + "\ncount--cur:" + cur + " max:" + max
+//						+ " s.length:" + (s.length() - depth) + " s:" + s);
+			} else {
+				path.push(s.length() - depth);
+				cur += path.peek() + 1;
+//				System.out.println(path + "\npush--cur:" + cur + " max:" + max
+//						+ " s.length:" + (s.length() - depth) + " s:" + s);
+			}
+
 		}
 
 		return max;
+	}
+
+	public int getDepth(String s) {
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) != '/') {
+				return i;
+			}
+		}
+		return 0;
 	}
 
 	public static void main(String[] args) {
 		String s = "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext";
 		Solution sln = new Solution();
 		System.out.println(sln.lengthLongestPath(s));
+		
+		
+		System.out.println(sln.lengthLongestPath("afile"));
+		System.out.println(sln.lengthLongestPath("a.file"));
 	}
 }
