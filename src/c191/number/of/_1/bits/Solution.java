@@ -1,7 +1,7 @@
 /**
  * 
  */
-package e191.number.of._1.bits;
+package c191.number.of._1.bits;
 
 
 /**
@@ -27,13 +27,15 @@ public class Solution {
 	// you need to treat n as an unsigned value
 		public int hammingWeight(int n) {
 
+			long nlong=n&0xFFFFFFFFL;
+			
 			int count = 0;
 
-			while (n > 0) {
-				if ((n ^ (n - 1)) == 1) {
+			while (nlong > 0) {
+				if ((nlong ^ (nlong - 1)) == 1) {
 					count++;
 				}
-				n >>= 1;
+				nlong >>= 1;
 			}
 
 			return count;
