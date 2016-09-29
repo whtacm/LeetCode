@@ -1,7 +1,7 @@
 /**
  * 
  */
-package e217.contains.duplicate;
+package c217.contains.duplicate;
 
 import java.util.HashMap;
 
