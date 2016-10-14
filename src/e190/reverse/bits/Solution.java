@@ -30,9 +30,11 @@ package e190.reverse.bits;
 public class Solution {
 	// you need treat n as an unsigned value
 	public int reverseBits(int n) {
+		long nlong = n & 0xFFFFFFFFL;
+
 		int[] array = new int[32];
-		
-		while (n>0) {
+
+		while (nlong > 0) {
 			
 		}
 		return 0;

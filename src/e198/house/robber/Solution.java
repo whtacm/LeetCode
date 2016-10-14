@@ -30,6 +30,9 @@ package e198.house.robber;
  */
 public class Solution {
 	public int rob(int[] nums) {
+		int sum = 0;
+		
+		
 		return 0;
 	}
 
