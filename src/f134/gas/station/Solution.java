@@ -3,6 +3,16 @@
  */
 package f134.gas.station;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * There are N gas stations along a circular route, where the amount of gas at
  * station i is gas[i].
@@ -29,50 +39,23 @@ package f134.gas.station;
 public class Solution {
 
 	public int canCompleteCircuit(int[] gas, int[] cost) {
-		int index = -1;
-		if (gas.length == 0) {
-			return index;
-		}
-		if (gas.length == 1) {
-			return 0;
+		if (gas == null || gas.length == 0) {
+			return -1;
 		}
 
-		// System.out.println("-->>");
-
-		int next = -1;
-		int cnext = -1;
-		int maxStep = -1;
-		boolean flag = false;
-		for (int i = 0; i < gas.length; i++) {
-			maxStep = gas[i];
-			flag = true;
-			for (int j = 1; j < gas.length; j++) {
-				if (maxStep == 0) {
-					flag = false;
-					break;
-				}
-				next = j + i;
-				cnext = j + i - 1;
-				if (next >= gas.length) {
-					next = Math.abs(next - gas.length);
-				}
-				if (cnext >= gas.length) {
-					cnext = Math.abs(cnext - gas.length);
-				}
-				maxStep -= cost[cnext];
-				if (maxStep >= 0) {
-					maxStep += gas[next];
-				} else {
-					flag = false;
-					break;
-				}
-			}
-			if (flag) {
-				return i;
-			}
+		int sum = 0;
+		int[] diff = new int[gas.length];
+		for (int i = 0; i < diff.length; i++) {
+			diff[i] = gas[i] - cost[i];
+			sum += diff[i];
 		}
 
-		return index;
+		if (sum < 0) {
+			return -1;
+		}
+		
+	
+		return -1;
 	}
 
 	public static void main(String[] args) {

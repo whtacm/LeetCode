@@ -3,6 +3,11 @@
  */
 package f079.word.search;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 
 /**
  * Given a 2D board and a word, find if the word exists in the grid.
@@ -32,7 +37,49 @@ package f079.word.search;
  *
  */
 public class Solution {
+
+	class Coor {
+		int x;
+		int y;
+
+		public Coor(int x, int y) {
+			// TODO Auto-generated constructor stub
+
+		}
+
+		public List<Coor> getNeighbors() {
+			List<Coor> list = new LinkedList<Solution.Coor>();
+
+			return list;
+		}
+	}
+
 	public boolean exist(char[][] board, String word) {
+		if (word == null || word.length() == 0) {
+			return true;
+		} else {
+			if (board == null || board.length == 0) {
+				return false;
+			}
+		}
+
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[0].length; j++) {
+
+				if (board[i][j] == word.charAt(0)) {
+					Stack<Map<Integer, Integer>> stack = new Stack<Map<Integer, Integer>>();
+					stack.add(new HashMap<Integer, Integer>(i, j));
+
+					while (stack.size() > 0) {
+						if (stack.size() == word.length()) {
+							return true;
+						}
+						
+					}
+				}
+
+			}
+		}
 
 		return false;
 	}
