@@ -83,6 +83,7 @@ public class Solution {
 
 		return false;
 	}
+	
 
 	/**
 	 * @param args
@@ -98,6 +99,9 @@ public class Solution {
 		System.err.println(new Solution().exist(board, w1));
 		// System.err.println(new Solution().exist(board, w2));
 		// System.err.println(new Solution().exist(board, w3));
+		
+
+		
 	}
 
 }
